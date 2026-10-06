@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ApexDrive AI — Car Rental Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Collapsible Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <button id="new-chat-btn" class="gemini-btn-pill">
+          <svg class="icon-plus" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>New rental session</span>
+        </button>
+      </div>
+      <div class="sidebar-section">
+        <span class="sidebar-label">Active Capabilities</span>
+        <ul class="fleet-pill-list">
+          <li>🚗 All Makes &amp; Models</li>
+          <li>🛡️ Full Damage Coverage</li>
+          <li>⚡ Electric / EV Fleet</li>
+          <li>🏔️ SUVs &amp; AWD Options</li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        <div class="status-indicator">
+          <span class="status-dot"></span>
+          <span>Local CPU Inference</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Chat Workspace -->
+    <main class="chat-workspace">
+      <!-- Top Bar -->
+      <header class="top-nav">
+        <div class="brand">
+          <svg class="gemini-sparkle-logo" viewBox="0 0 24 24" width="24" height="24">
+            <defs>
+              <linearGradient id="geminiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#4E97FD" />
+                <stop offset="50%" stop-color="#7C5CFE" />
+                <stop offset="100%" stop-color="#F27289" />
+              </linearGradient>
+            </defs>
+            <path fill="url(#geminiGrad)" d="M12 0C12 6.627 6.627 12 0 12c6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12z"/>
+          </svg>
+          <span class="brand-title">ApexDrive</span>
+        </div>
+      </header>
+
+      <!-- Messages View -->
+      <div id="messages-container" class="messages-container">
+        <!-- Landing Greeting when session is fresh -->
+        <div id="welcome-hero" class="welcome-hero">
+          <h1 class="gemini-gradient-text">Hello, Traveler</h1>
+          <p class="hero-subtext">Where are you heading? Ask about any vehicle, rates, or insurance options.</p>
+          <div class="suggestion-grid">
+            <button class="suggestion-card" data-prompt="What 7-seater SUVs do you offer for a mountain trip?">
+              <span>What 7-seater SUVs do you offer for a mountain trip?</span>
+            </button>
+            <button class="suggestion-card" data-prompt="What is the daily rate and range for a Tesla Model 3?">
+              <span>What is the daily rate and range for a Tesla Model 3?</span>
+            </button>
+            <button class="suggestion-card" data-prompt="Explain the difference between Basic CDW and Full Coverage.">
+              <span>Explain the difference between Basic CDW and Full Coverage.</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input Area -->
+      <div class="input-wrapper">
+        <form id="chat-form" class="gemini-input-bar">
+          <textarea id="user-input" rows="1" placeholder="Ask about any car make, model, or rental policy..." required></textarea>
+          <button type="submit" id="send-btn" aria-label="Send message">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            </svg>
+          </button>
+        </form>
+        <p class="disclaimer-text">ApexDrive Assistant operates completely locally on quantized CPU weights without cloud APIs[cite: 1].</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="chat.js"></script>
+</body>
+</html>
