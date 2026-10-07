@@ -55,7 +55,6 @@ class ConversationManager:
     def build_orchestrated_prompt(self, session_id: str, incoming_message: str) -> List[dict]:
         session = self.get_or_create_session(session_id)
         
-        # 1. Structure the System Prompt using delimited XML sections
         orchestrated_system_prompt = f"""{SYSTEM_PROMPT}
 
 <dialogue_state>
@@ -63,14 +62,13 @@ class ConversationManager:
 - Memory Anchors: {session.collected_slots if session.collected_slots else "None recorded yet"}
 </dialogue_state>
 
-<operational_rules>
-- You must acknowledge details given in prior turns (e.g., chosen car or dates) without asking again.
-- Refuse out-of-domain requests using the exact refusal phrase.
-- Maintain turn-taking: ask ONE question at a time to guide the user to the next stage.
-</operational_rules>
+<strict_guardrails>
+- You are not a general assistant.
+- Under NO circumstance solve math queries, general knowledge, or coding tasks.
+- If the user's prompt is not about cars, rental pricing, insurance, or reservations, immediately output the mandatory refusal sentence.
+</strict_guardrails>
 """
 
-        # 2. Build message sequence with explicit turn roles
         messages = [{"role": "system", "content": orchestrated_system_prompt}]
         
         for turn in session.history:

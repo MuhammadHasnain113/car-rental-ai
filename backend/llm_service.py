@@ -11,9 +11,9 @@ async def stream_chat_completion(messages: List[dict]) -> AsyncGenerator[str, No
         "messages": messages,
         "stream": True,
         "options": {
-            "temperature": 0.0,  # Zero temperature ensures strict adherence to prompt constraints
-            "top_p": 0.2,
-            "presence_penalty": 0.0
+            "temperature": 0.0,
+            "top_p": 0.1,
+            "top_k": 20
         }
     }
     async with httpx.AsyncClient(timeout=90.0) as client:
